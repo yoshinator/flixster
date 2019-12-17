@@ -2,7 +2,7 @@
 <ul class="reviews">
 <% @reviews.each do |rev| %>
   <li>
-    <%=render "reviews/stars", percent: rev.stars_as_percent%> 
+     <%=render "reviews/stars", percent: rev.stars_as_percent%> 
     <p>
       <%=rev.name%>
       <span class="date">
@@ -10,7 +10,7 @@
       </span>
       </p>
       <p>
-        <%=rev.comment%>
+        <%=rev.comment%> <div><%= link_to 'Delete', movie_review_path(@movie, rev), method: :delete, class: 'alert-danger' %></div>
       </p>
   </li>
 <% end %>

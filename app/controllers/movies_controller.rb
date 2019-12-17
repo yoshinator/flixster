@@ -1,15 +1,16 @@
 class MoviesController < ApplicationController
 
+    before_action :set_movie, only: [:show, :edit, :update, :destroy ]
+
     def index
         @movies = Movie.released
     end
 
     def show
-        @movie = Movie.find(params[:id])
+        @review = @movie.reviews.new
     end
 
     def edit 
-        @movie = Movie.find(params[:id])
     end
 
     def update
@@ -36,10 +37,14 @@ class MoviesController < ApplicationController
     end
 
     def destroy 
-        Movie.find(params[:id]).destroy
+        @movie.destroy
         redirect_to movies_path, alert: "Movie has been deleted"
     end 
+
     private
+    def set_movie
+        @movie = Movie.find(params[:id])
+    end 
 
     def movie_params
         params.require(:movie).permit(:title, :description, :rating, :director, :duration,                                              :image_file_name, :total_gross, :released_on) 

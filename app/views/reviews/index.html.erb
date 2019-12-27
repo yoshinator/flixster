@@ -11,6 +11,7 @@
       </p>
       <p>
         <%=rev.comment%> <div><%= link_to 'Delete', movie_review_path(@movie, rev), method: :delete, class: 'alert-danger' %></div>
+        <%=rev.comment%> <div><%= link_to 'Edit', edit_movie_review_path(@movie, rev), class: 'alert-notice' %></div>
       </p>
   </li>
 <% end %>

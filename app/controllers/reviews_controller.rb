@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
 
-  before_action :set_movie, only: [:index, :new, :create, :destroy]
+  before_action :set_movie
 
   def index 
     @reviews = @movie.reviews
@@ -14,6 +14,19 @@ class ReviewsController < ApplicationController
     @review = @movie.reviews.new(review_params)
     if @review.valid?
       @review.save 
+      redirect_to @movie, notice: "Review successfully saved!"
+    else
+      render :new
+    end
+  end 
+
+  def edit 
+    @review = @movie.reviews.find(params[:id])
+  end 
+
+  def update 
+     @review = @movie.reviews.find(params[:id])
+    if @review.update_attributes(review_params)
       redirect_to @movie, notice: "Review successfully saved!"
     else
       render :new
